@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".op").click(function () {
+                //console.log($(this).text());
+                var field = $("#inputField").val();
+                var operators = ['+','-','*','/'];
+                var last = field.charAt(field.length - 1);
+                if(operators.indexOf(last) != -1){
+                    field = field.substr(0, field.length - 1) + $(this).text();
+                    $("#inputField").val(field);
+                    console.log(field);
+                }else{
+                    $("#inputField").val($("#inputField").val() + $(this).text());
+                }
+                //console.log(last);
+
+            })
+            $(".num").click(function () {
+                console.log($(this).text());
+                if($("#inputField").val() == '0'){
+                    $("#inputField").val($(this).text());
+                }else{
+                    $("#inputField").val($("#inputField").val() + $(this).text());
+                }
+                var field = $("#inputField").val();
+                console.log(eval(field));
+                $("#ans").text(' = '+eval(field));
+            })
+
+            $("#del").click(function () {
+                console.log("del");
+                $("#inputField").val("0");
+                $("#ans").text("= 0");
+            })
+            $("#dot").click(function () {
+                console.log("dot");
+                var field = $("#inputField").val();
+                if(field.indexOf('.') == -1 ){
+                    $("#inputField").val($("#inputField").val() + '.');
+                }
+            })
+            $("#equ").click(function () {
+                var value = $("#ans").text();
+                value = value.substr(3,value.length);
+                console.log(value);
+                $("#inputField").val(value);
+            })
+        })
+    </script>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="input-group">
+        <input type="text" class="form-control" id="inputField" value="0">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="ans"></span>
+        </div>
+    </div>
+
+    <div class="pad">
+        <div class="div4">
+            <button type="button" class="btn-dark" id="del">CE</button>
+        </div>
+        <button type="button" class="op btn-dark">/</button>
+        <button type="button" class="op btn-dark">*</button>
+        <button type="button" class="op btn-dark">-</button>
+        <button type="button" class="num btn-dark">7</button>
+        <button type="button" class="num btn-dark">8</button>
+        <button type="button" class="num btn-dark">9</button>
+        <button type="button" class="num btn-dark">4</button>
+        <button type="button" class="num btn-dark">5</button>
+        <button type="button" class="num btn-dark">6</button>
+        <button type="button" class="num btn-dark">1</button>
+        <button type="button" class="num btn-dark">2</button>
+        <button type="button" class="num btn-dark">3</button>
+        <button type="button" class="btn-dark" id="dot">.</button>
+
+        <div class="div1">
+            <button type="button" class="num btn-dark">0</button>
+        </div>
+        <div class="div2">
+            <button type="button" class="btn-dark" id="equ">=</button>
+        </div>
+
+        <div class="div3">
+            <button type="button" class="op btn-dark" >+</button>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>
